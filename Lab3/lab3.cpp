@@ -62,7 +62,7 @@ int main()
     else
     {
         // если нет в папке
-        cout << "Unable to open file";
+        cout << "Не удалось открыть файл";
     }
     return 0;
 }
