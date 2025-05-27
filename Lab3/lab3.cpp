@@ -4,53 +4,63 @@
 #include <windows.h>
 #include <iomanip>
 
-using namespace std;
-//ру
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
 #define NOMINMAX 1
 #endif
 
-int main() {
-    // ру
+using namespace std;
+
+int main()
+{
     #ifdef _WIN32
     SetConsoleCP(CP_UTF8);
     SetConsoleOutputCP(CP_UTF8);
     #endif
-
-    ifstream file("my_file.txt");
+    
+    ifstream myfile("my_file.txt");
     string line;
-
-    if (!file.is_open()) {
-        cout << "Не удалось открыть файл" << endl;
-        return 1;
-    }
-
-    while (getline(file, line)) {
-        // ищем последний пробел в строке
-        int index = line.length() - 1;
-        while (index > 0 && line[index] != ' ') {
-            index--;
-        }
-
-        // получаем имя файла после пробела
-        string filename = line.substr(index + 1);
-
-        // ищем точку в имени файла
-        size_t dotPos = filename.find('.');
-        if (dotPos != string::npos) {
-            string ext = filename.substr(dotPos + 1);
-            if (ext == "txt") {
-                cout << filename << endl; // только txt файлы
-            } else {
-                cout << "ОШИБКА" << endl; // остальные
+    // объявление файла
+    if (myfile.is_open())
+    {
+        // пока есть непустые строки
+        while (getline(myfile, line))
+        {
+            // идем с конца строки, ищем первый пробел
+            int index = line.length() - 1;
+            while (line.at(index) != ' ' && index > 0)
+            {
+                index--;
             }
-        } else {
-            // если нет точки — нет весело
-            cout << "ОШИБКА" << endl;
+            // формируем подстроку с первого символа после пробела до последнего символа строки
+            string filename = line.substr(index + 1, line.length() - 1);
+            size_t dotPos = filename.find('.');
+            //точка
+            if (dotPos != string::npos)
+            {   
+                //расширение после точки
+                string ext = filename.substr(dotPos + 1);
+                if (ext == "txt")
+                {
+                    cout << filename << '\n';
+                }
+                else
+                {
+                    cout << "ОШИБКА" << '\n';
+                }
+            }
+            else
+            {
+                cout << "ОШИБКА" << '\n';
+            }
         }
+        //закрываемся
+        myfile.close();
     }
-
-    file.close();
+    else
+    {
+        // если нет в папке
+        cout << "Unable to open file";
+    }
     return 0;
 }
