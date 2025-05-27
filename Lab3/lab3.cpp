@@ -18,13 +18,13 @@ int main()
     SetConsoleOutputCP(CP_UTF8);
     #endif
     
-    ifstream myfile("my_file.txt");
+    ifstream LastSTR("my_file.txt");
     string line;
     // объявление файла
-    if (myfile.is_open())
+    if (LastSTR.is_open())
     {
         // пока есть непустые строки
-        while (getline(myfile, line))
+        while (getline(LastSTR, line))
         {
             // идем с конца строки, ищем первый пробел
             int index = line.length() - 1;
@@ -45,17 +45,19 @@ int main()
                     cout << filename << '\n';
                 }
                 else
-                {
+                {   
+                    //не тхт
                     cout << "ОШИБКА" << '\n';
                 }
             }
             else
             {
+                //нет точки
                 cout << "ОШИБКА" << '\n';
             }
         }
         //закрываемся
-        myfile.close();
+        LastSTR.close();
     }
     else
     {
