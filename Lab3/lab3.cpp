@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <iomanip>
 
+// русский
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
 #define NOMINMAX 1
@@ -38,7 +39,7 @@ int main()
             //точка
             if (dotPos != string::npos)
             {   
-                //расширение после точки
+                // расширение после точки
                 string ext = filename.substr(dotPos + 1);
                 if (ext == "txt")
                 {
@@ -46,17 +47,17 @@ int main()
                 }
                 else
                 {   
-                    //не тхт
+                    // не тхт
                     cout << "ОШИБКА" << '\n';
                 }
             }
             else
             {
-                //нет точки
+                // нет точки
                 cout << "ОШИБКА" << '\n';
             }
         }
-        //закрываемся
+        // закрываемся
         LastSTR.close();
     }
     else
